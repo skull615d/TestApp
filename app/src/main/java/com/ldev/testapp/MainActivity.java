@@ -18,6 +18,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        
+        new Thread(() -> {
+            try {
+                Thread.sleep(delayMillisecond);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            binding.progressBar.post(() -> binding.progressBar.setVisibility(View.GONE));
+        }).start();
     }
 }
